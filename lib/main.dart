@@ -39,6 +39,8 @@ class ControllerBindings extends Bindings {
   void dependencies() {
     Get.put(HomeController());
     Get.put(ConnectionController());
+
+    ///new code
     // TODO: implement dependencies
   }
 }
