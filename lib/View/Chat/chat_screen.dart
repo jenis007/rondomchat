@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nearby_connections/nearby_connections.dart';
 import 'package:rondomchat/Controller/connection_controller.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -50,8 +46,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       itemBuilder: (context, index) {
                         bool myMsg = controller.connectedUsers[widget.id]
                             ['message'][index]['me'];
-
-                        print(myMsg);
                         return Row(
                           mainAxisAlignment: myMsg
                               ? MainAxisAlignment.end

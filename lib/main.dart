@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:rondomchat/PreferenceManager/preference_manager.dart';
+import 'Controller/connection_controller.dart';
+import 'Controller/home_controller.dart';
 import 'View/Home/home_screen.dart';
 import 'View/Auth/register_screen.dart';
 
@@ -35,8 +37,8 @@ class MyApp extends StatelessWidget {
 class ControllerBindings extends Bindings {
   @override
   void dependencies() {
-    // Get.put(HomeController());
-    // Get.put(ConnectionController());
+    Get.put(HomeController());
+    Get.put(ConnectionController());
     // TODO: implement dependencies
   }
 }

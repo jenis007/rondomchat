@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nearby_connections/nearby_connections.dart';
 import 'package:rondomchat/Controller/connection_controller.dart';
 
 class NearByUsersList extends StatelessWidget {
@@ -51,7 +50,6 @@ class NearByUsersList extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  print(element);
                   controller.sendConnectionRequest(
                       element, data[element]['username']);
                 },

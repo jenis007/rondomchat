@@ -70,7 +70,7 @@ class ConnectionController extends GetxController {
   Future startAdvertising() async {
     username = await PreferenceManager.getUserName();
     try {
-      bool a = await Nearby().startAdvertising(
+      await Nearby().startAdvertising(
         username,
         connectionStrategy,
         serviceId: serviceId,
@@ -98,7 +98,7 @@ class ConnectionController extends GetxController {
   Future startDiscovering() async {
     username = await PreferenceManager.getUserName();
     try {
-      bool a = await Nearby().startDiscovery(
+      await Nearby().startDiscovery(
         username,
         connectionStrategy,
         serviceId: serviceId,
@@ -195,16 +195,16 @@ class ConnectionController extends GetxController {
           connectedUsers[id]['message'].add(data);
           update();
 
-          print('DATA RECEIVED>>>>>>> $data');
+          // print('DATA RECEIVED>>>>>>> $data');
         }
       },
       onPayloadTransferUpdate: (endid, payloadTransferUpdate) {
         if (payloadTransferUpdate.status == PayloadStatus.IN_PROGRESS) {
-          print(payloadTransferUpdate.bytesTransferred);
+          // print(payloadTransferUpdate.bytesTransferred);
         } else if (payloadTransferUpdate.status == PayloadStatus.FAILURE) {
-          print("failed");
+          // print("failed");
         } else if (payloadTransferUpdate.status == PayloadStatus.SUCCESS) {
-          print("sent");
+          // print("sent");
         }
       },
     );
