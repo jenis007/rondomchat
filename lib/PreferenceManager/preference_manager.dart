@@ -21,4 +21,8 @@ class PreferenceManager {
   static getAge() {
     return storage.read(age);
   }
+
+  static Future logout() async {
+    await storage.erase();
+  }
 }

@@ -11,7 +11,7 @@ class NearByUsersList extends StatelessWidget {
       builder: (controller) {
         if (controller.nearByUsers.isNotEmpty) {
           return Column(
-            children: _buildTextWidgets(controller.nearByUsers, controller),
+            children: _buildUserWidgets(controller.nearByUsers, controller),
           );
         } else {
           return const Center(
@@ -25,11 +25,12 @@ class NearByUsersList extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildTextWidgets(
+  List<Widget> _buildUserWidgets(
       Map<String, dynamic> data, ConnectionController controller) {
-    List<Widget> textWidgets = []; // Add an empty Container as a default widget
+    List<Widget> usersWidgets =
+        []; // Add an empty Container as a default widget
     for (var element in data.keys) {
-      textWidgets.add(
+      usersWidgets.add(
         Container(
           height: 75,
           padding: const EdgeInsets.all(10),
@@ -40,6 +41,10 @@ class NearByUsersList extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              CircleAvatar(
+                backgroundImage: FileImage(data[element]['profile']),
+                radius: 35,
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,6 +65,6 @@ class NearByUsersList extends StatelessWidget {
         ), // ending bracket of container
       ); // ending bracket of add function
     } // ending bracket of for loop
-    return textWidgets;
+    return usersWidgets;
   }
 }

@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rondomchat/PreferenceManager/preference_manager.dart';
 import 'package:rondomchat/View/Home/home_screen.dart';
 
@@ -16,6 +20,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController username = TextEditingController();
   TextEditingController age = TextEditingController();
 
+  File? image;
+  Uint8List? bytes;
+
+  ImagePicker imagePicker = ImagePicker();
+
+  void pickImage() async {
+    XFile? file = await imagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
+
+    image = File(file!.path);
+
+    bytes = image!.readAsBytesSync();
+
+    log('BYTES ${jsonEncode(bytes)}');
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +44,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            InkResponse(
+              onTap: () {
+                pickImage();
+              },
+              child: CircleAvatar(
+                radius: 55,
+                child: image == null
+                    ? const Icon(Icons.person)
+                    : Image.file(image!),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 55,
@@ -72,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Map<String, dynamic> userData = {
                     "username": username.text,
                     "age": age.text,
+                    "profile": bytes
                   };
                   await PreferenceManager.setUserName(jsonEncode(userData));
                   await PreferenceManager.setAge(age.text);

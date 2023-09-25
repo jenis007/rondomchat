@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -104,9 +105,13 @@ class ConnectionController extends GetxController {
         serviceId: serviceId,
         onEndpointFound: (id, name, serviceId) {
           var data = jsonDecode(name);
+
+          Uint8List bytes = data['profile'];
+
           nearByUsers[id] = {
             "name": data['username'],
             "age": data['age'],
+            "profile": File.fromRawPath(bytes),
             "username": name,
             "serviceId": serviceId,
             "message": []
